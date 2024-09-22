@@ -1,0 +1,54 @@
+volumes:
+  nodemodules: {}
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+
+services:
+  webapp:
+    container_name: devsoft-frontend
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-frontend
+    tty: true
+    networks:
+      - frontend
+    ports:
+      - "127.0.0.1:8080:4200"
+    volumes:
+      - nodemodules:/node_modules
+    entrypoint: /bin/sh
+
+  webapi:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-backend
+    tty: true
+    networks:
+      - backend
+    ports:
+      - 3333:3333
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgresql
+    image: postgres
+    restart: always
+    tty: true
+    ports:
+      - 80:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=rodrigo32215630
+      - POSTGRES_DB=devsoft
+      - POSTGRES_PORT=5432
+
+
+
+
+
+

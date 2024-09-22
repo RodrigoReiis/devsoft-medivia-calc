@@ -1,0 +1,17 @@
+FROM node:alpine AS build
+
+WORKDIR /app
+
+COPY ./package* .
+
+RUN npm install
+
+COPY . .
+
+RUN npm install nx@latest --global
+
+RUN nx build frontend --prod
+
+EXPOSE 8080:4200
+
+ENTRYPOINT ["/bin/sh"]
