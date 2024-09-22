@@ -31,6 +31,11 @@
         "{workspaceRoot}/eslint.config.js"
       ]
     },
+    "@nx/js:node": {
+      "cache": false,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
@@ -50,6 +55,11 @@
       "e2eTestRunner": "none",
       "linter": "eslint",
       "style": "scss",
+      "unitTestRunner": "jest"
+    },
+    "@nx/js:node": {
+      "e2eTestRunner": "none",
+      "linter": "eslint",
       "unitTestRunner": "jest"
     }
   },

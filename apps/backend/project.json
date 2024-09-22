@@ -10,7 +10,7 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "backend:build",
+        "buildTarget": "backend:build:development",
         "runBuildTargetDependencies": false
       },
       "configurations": {
