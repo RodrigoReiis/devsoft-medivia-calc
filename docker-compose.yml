@@ -18,10 +18,10 @@ services:
     networks:
       - frontend
     ports:
-      - "127.0.0.1:8080:4200"
+      - "0.0.0.0:8080:4200"
     volumes:
       - nodemodules:/node_modules
-    entrypoint: /bin/sh
+    entrypoint: ["nx", "serve", "frontend", "--host", "0.0.0.0"]
 
   webapi:
     container_name: backend
@@ -41,17 +41,13 @@ services:
   postgres:
     container_name: postgresql
     image: postgres
-    restart: always
-    tty: true
     ports:
       - 5432:5432
     volumes:
       - postgresdata:/var/lib/postgresql/data
+    # TODO: REMOVER A SENHA HARDDCODED E DEIXAR NUM ARQUIVO DE ENVIRONMENTS
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=rodrigo32215630
-      - POSTGRES_DB=devsoft
-      - POSTGRES_PORT=5432
+      POSTGRES_PASSWORD: "rodrigo32215630"
 
 
 

@@ -1,14 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'frontend';
+  constructor(private http: HttpClient) {}
+  ngOnInit(): void {
+    console.log('AAAAAAAAAAAAAAAAAAAAAAA')
+    console.log(this.http);
+    this.http.get('http://localhost:3000/api')
+  }
 }
