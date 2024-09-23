@@ -1,6 +1,7 @@
 volumes:
   nodemodules: {}
-  postgresdata: {}
+  postgres_data:
+    driver: local
 
 networks:
   frontend:
@@ -39,15 +40,14 @@ services:
       NODE_ENV: development
 
   postgres:
-    container_name: postgresql
-    image: postgres
-    ports:
-      - 5432:5432
-    volumes:
-      - postgresdata:/var/lib/postgresql/data
-    # TODO: REMOVER A SENHA HARDDCODED E DEIXAR NUM ARQUIVO DE ENVIRONMENTS
+    image: postgres:latest
     environment:
-      POSTGRES_PASSWORD: "rodrigo32215630"
+      POSTGRES_PASSWORD: '1234'
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
 
 
 
