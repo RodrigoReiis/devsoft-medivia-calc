@@ -24,6 +24,15 @@ services:
       - nodemodules:/node_modules
     entrypoint: ["nx", "serve", "frontend", "--host", "0.0.0.0"]
 
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: '1234'
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   webapi:
     container_name: backend
     build:
@@ -38,15 +47,6 @@ services:
       - postgres
     environment:
       NODE_ENV: development
-
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_PASSWORD: '1234'
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
 
 
